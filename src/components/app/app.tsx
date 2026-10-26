@@ -22,6 +22,7 @@ import {
   selectIngredientsError,
   selectIngredientsLoading,
 } from '@slices/ingredients';
+import { checkUserAuth } from '@slices/user';
 import { Preloader } from '@ui';
 import { clsx } from 'clsx';
 import { useEffect } from 'react';
@@ -47,6 +48,7 @@ const App = (): React.JSX.Element => {
 
   useEffect(() => {
     void dispatch(fetchIngredients());
+    void dispatch(checkUserAuth());
   }, [dispatch]);
 
   return (

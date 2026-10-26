@@ -5,8 +5,10 @@ import {
   selectOrderModalData,
   selectOrderRequest,
 } from '@slices/order';
+import { selectUser } from '@slices/user';
 import { BurgerConstructorUI } from '@ui';
 import { useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from '@services/store';
 
@@ -17,8 +19,17 @@ export const BurgerConstructor = (): React.JSX.Element | null => {
   const constructorItems = useSelector(selectConstructorItems);
   const orderRequest = useSelector(selectOrderRequest);
   const orderModalData = useSelector(selectOrderModalData);
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const onOrderClick = (): void => {
+    // заказ могут оформить только авторизованные пользователи
+    if (!user) {
+      void navigate('/login', { state: { from: location } });
+      return;
+    }
+
     if (!constructorItems.bun || orderRequest) return;
 
     const ingredientIds = [

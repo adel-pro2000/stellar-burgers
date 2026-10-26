@@ -6,6 +6,7 @@ import { ingredientsSlice } from './slices/ingredients';
 import { orderSlice } from './slices/order';
 import { orderInfoSlice } from './slices/order-info';
 import { profileOrdersSlice } from './slices/profile-orders';
+import { userSlice } from './slices/user';
 
 export const rootReducer = combineReducers({
   [ingredientsSlice.name]: ingredientsSlice.reducer,
@@ -14,4 +15,5 @@ export const rootReducer = combineReducers({
   [orderInfoSlice.name]: orderInfoSlice.reducer,
   [feedSlice.name]: feedSlice.reducer,
   [profileOrdersSlice.name]: profileOrdersSlice.reducer,
+  [userSlice.name]: userSlice.reducer,
 });
