@@ -16,12 +16,21 @@ import {
   Register,
   ResetPassword,
 } from '@pages';
+import {
+  fetchIngredients,
+  selectIngredients,
+  selectIngredientsError,
+  selectIngredientsLoading,
+} from '@slices/ingredients';
 import { Preloader } from '@ui';
 import { clsx } from 'clsx';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation, useMatch, useNavigate } from 'react-router-dom';
 
+import { useDispatch, useSelector } from '@services/store';
+
 import type { AppContentProps, TDetailPageProps } from './type';
-import type { TIngredient, TLocationState } from '@utils-types';
+import type { TLocationState } from '@utils-types';
 
 import '../../index.css';
 
@@ -31,9 +40,14 @@ const ORDER_NUMBER_LENGTH = 6;
 const INGREDIENT_DETAILS_TITLE = 'Детали ингредиента';
 
 const App = (): React.JSX.Element => {
-  const ingredients: TIngredient[] = [];
-  const isIngredientsLoading = false;
-  const ingredientsError = null;
+  const dispatch = useDispatch();
+  const ingredients = useSelector(selectIngredients);
+  const isIngredientsLoading = useSelector(selectIngredientsLoading);
+  const ingredientsError = useSelector(selectIngredientsError);
+
+  useEffect(() => {
+    void dispatch(fetchIngredients());
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>
