@@ -13,10 +13,15 @@ export const ModalUI = memo(function ModalUI({
 }: TModalUIProps): React.JSX.Element {
   return (
     <>
-      <div className={styles.modal}>
+      <div className={styles.modal} data-testid="modal">
         <div className={styles.header}>
           <h3 className="text text_type_main-large">{title}</h3>
-          <button className={styles.button} type="button" aria-label="Закрыть">
+          <button
+            className={styles.button}
+            type="button"
+            aria-label="Закрыть"
+            data-testid="modal-close"
+          >
             <CloseIcon type="primary" onClick={onClose} />
           </button>
         </div>
